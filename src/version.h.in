@@ -1,23 +1,23 @@
-#ifndef SKELETON_VERSION_H_
-#define SKELETON_VERSION_H_
+#ifndef CACHELINE_VERSION_H_
+#define CACHELINE_VERSION_H_
 
-namespace skeleton {
+namespace cacheline {
 
 namespace {
 
-#cmakedefine SKELETON_PROJECT_VERSION "@SKELETON_PROJECT_VERSION@"
-#cmakedefine SKELETON_GIT_COMMIT_HASH "@SKELETON_GIT_COMMIT_HASH@"
+#cmakedefine CACHELINE_PROJECT_VERSION "@CACHELINE_PROJECT_VERSION@"
+#cmakedefine CACHELINE_GIT_COMMIT_HASH "@CACHELINE_GIT_COMMIT_HASH@"
 
 } // namespace
 
 std::string version() {
-    return SKELETON_PROJECT_VERSION;
+    return CACHELINE_PROJECT_VERSION;
 }
 
 std::string git_commit_hash() {
-    return SKELETON_GIT_COMMIT_HASH;
+    return CACHELINE_GIT_COMMIT_HASH;
 }
 
-} // namespace skeleton
+} // namespace cacheline
 
-#endif // SKELETON_VERSION_H_
+#endif // CACHELINE_VERSION_H_
