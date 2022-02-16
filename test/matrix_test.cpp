@@ -34,9 +34,10 @@ TEST_F(MatrixTest, Partition) {
     int num_cols = num_col_blocks * cols_per_block;
 
     cacheline::Matrix<int> matrix{num_rows, num_cols};
+    int val = 0;
     for (int i = 0; i < num_rows; ++i) {
         for (int j = 0; j < num_cols; ++j) {
-            matrix.set(i, j, 1);
+            matrix.set(i, j, val++);
         }
     }
 
@@ -53,7 +54,8 @@ TEST_F(MatrixTest, Partition) {
         }
     }
 
-    ASSERT_EQ(sum, num_rows * num_cols);
+    int num_entries = num_rows * num_cols;
+    ASSERT_EQ(sum, num_entries * (num_entries - 1) / 2);
 }
 
 TEST_F(MatrixTest, PartitionUneven) {
@@ -63,9 +65,10 @@ TEST_F(MatrixTest, PartitionUneven) {
     int num_cols = 17;
 
     cacheline::Matrix<int> matrix{num_rows, num_cols};
+    int val = 0;
     for (int i = 0; i < num_rows; ++i) {
         for (int j = 0; j < num_cols; ++j) {
-            matrix.set(i, j, 1);
+            matrix.set(i, j, val++);
         }
     }
 
@@ -84,5 +87,6 @@ TEST_F(MatrixTest, PartitionUneven) {
         }
     }
 
-    ASSERT_EQ(sum, num_rows * num_cols);
+    int num_entries = num_rows * num_cols;
+    ASSERT_EQ(sum, num_entries * (num_entries - 1) / 2);
 }

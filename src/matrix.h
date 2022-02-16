@@ -10,7 +10,7 @@ template <typename T> class Matrix {
   public:
     class View {
       public:
-        void visit(int i, int j, std::function<void(T)> fn) {
+        void visit(int i, int j, std::function<void(T)> fn) const {
             matrix.visit(row + i, col + j, fn);
         }
 
@@ -19,7 +19,7 @@ template <typename T> class Matrix {
 
       private:
         friend class Matrix<T>;
-        View(Matrix<T>& matrix, int row, int col, int num_rows, int num_cols)
+        View(const Matrix<T>& matrix, int row, int col, int num_rows, int num_cols)
             : matrix(matrix), row(row), col(col), num_rows(num_rows), num_cols(num_cols) {}
 
         const Matrix<T>& matrix;
@@ -42,11 +42,11 @@ template <typename T> class Matrix {
         fn(arr[i][j]);
     };
 
-    View view(int row, int col, int num_rows, int num_cols) {
+    View view(int row, int col, int num_rows, int num_cols) const {
         return View(*this, row, col, num_rows, num_cols);
     }
 
-    std::vector<View> partition(int num_row_blocks, int num_col_blocks) {
+    std::vector<View> partition(int num_row_blocks, int num_col_blocks) const {
         std::vector<View> views{};
         int rows_per_block = num_rows / num_row_blocks;
         int rows_rem = num_rows % rows_per_block;
@@ -64,17 +64,19 @@ template <typename T> class Matrix {
                                      num_cols_processed,
                                      rows_per_block + add_row,
                                      cols_per_block + add_col));
+                num_cols_processed += cols_per_block + add_col;
             }
-            num_rows_processed = rows_per_block + add_row;
+            num_rows_processed += rows_per_block + add_row;
         }
 
         return views;
     }
 
-  private:
-    T** arr;
     const int num_rows;
     const int num_cols;
+
+  private:
+    T** arr;
 };
 
 } // namespace cacheline
