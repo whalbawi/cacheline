@@ -25,4 +25,7 @@ jobs:
       run: cmake --build ${{github.workspace}}/build
 
     - name: Run unit tests
-      run: ctest --test-dir ${{github.workspace}}/build -R unit-tests -V
+      run: ctest --test-dir ${{github.workspace}}/build -R cacheline-tests -V
+
+    - name: Run benchmarks
+      run: ctest --test-dir ${{github.workspace}}/build -R cacheline-benchmarks -V
