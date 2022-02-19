@@ -47,6 +47,7 @@ set(CACHELINE_TEST_LIST
 
 # Benchmark files
 set(CACHELINE_BENCHMARK_LIST
+    ${CACHELINE_BENCHMARK_DIR}/counters_bench.cpp
     ${CACHELINE_BENCHMARK_DIR}/matrix_bench.cpp
 )
 
