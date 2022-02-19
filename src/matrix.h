@@ -34,6 +34,13 @@ template <typename T> class Matrix {
         }
     }
 
+    ~Matrix() {
+        for (int i = 0; i < num_rows; ++i) {
+            delete[] arr[i];
+        }
+        delete[] arr;
+    }
+
     void set(int i, int j, T val) {
         arr[i][j] = val;
     }
